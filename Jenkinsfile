@@ -7,9 +7,11 @@ pipeline {
 
           steps{
               script{
-                if ( $GIT_BRANCH=='origin/master' )
+                if ( env.GIT_BRANCH=='origin/master' )
                 {
+                  env.branch_pushed="master"
                   sh "printenv"
+
                 }
                 }
             }
