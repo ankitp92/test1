@@ -6,7 +6,7 @@ pipeline {
         stage('build') {
 
           steps{
-              if [ $GIT_BRANCH!='origin/master' ]
+              if ( $GIT_BRANCH!='origin/master' )
               then
                 sh "printenv"
               fi
