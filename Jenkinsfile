@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('build') {
           steps{
-              echo "We are here"
+              echo env.GIT_BRANCH
               sh "printenv"
             }
           }
