@@ -7,10 +7,10 @@ pipeline {
 
           steps{
               script{
-                if [ $GIT_BRANCH=='origin/master' ]
-                then
+                if ( $GIT_BRANCH=='origin/master' )
+                {
                   sh "printenv"
-                fi
+                }
                 }
             }
           }
