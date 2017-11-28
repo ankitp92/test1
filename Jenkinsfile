@@ -16,12 +16,12 @@ pipeline {
                 }
             }
 
-              node('master') {
-                branch_pushed = env.branch_pushed
-                build job: 'test2', parameters: [[$class: 'StringParameterValue', name: 'branch_pushed', value: branch_pushed]]
-              }
 
-          }
+          }      
+      node('master') {
+        branch_pushed = env.branch_pushed
+        build job: 'test2', parameters: [[$class: 'StringParameterValue', name: 'branch_pushed', value: branch_pushed]]
+      }
     }
 
 
