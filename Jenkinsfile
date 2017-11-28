@@ -4,8 +4,7 @@ pipeline {
 
     stages {
         stage('build') {
-            sh 'printenv'
-            println "We are here"
+            sh 'echo "We are here"'
     }
 
 }
