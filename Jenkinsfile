@@ -18,11 +18,18 @@ pipeline {
 
 
           }
-          stage('build_next'){
+          stage('build_next') {
             node('master') {
               branch_pushed = env.branch_pushed
               build job: 'test2', parameters: [[$class: 'StringParameterValue', name: 'branch_pushed', value: branch_pushed]]
             }
+
+            steps{
+              script{
+                echo "We are here"
+              }
+            }
+
           }
 
     }
