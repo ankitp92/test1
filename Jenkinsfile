@@ -16,7 +16,7 @@ pipeline {
                 }
             }
             agent {
-              node {
+              node: {
                 branch_pushed = env.GIT_BRANCH
                 build job: 'test2', parameters: [[$class: 'StringParameterValue', name: 'branch_pushed', value: branch_pushed]]
               }
