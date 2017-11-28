@@ -4,11 +4,12 @@ pipeline {
 
     stages {
         stage('build') {
+          when{
+            branch "test"
+          }
+
           steps{
               echo env.GIT_BRANCH
-              if(env.GIT_BRANCH == 'origin/master'){
-                env.is_master_branch = true
-              }
               sh "printenv"
             }
           }
