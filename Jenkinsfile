@@ -6,7 +6,9 @@ pipeline {
         stage('build') {
           steps{
               echo "We are here"
+              sh "printenv"
             }
+          }
     }
 
 }
