@@ -4,11 +4,14 @@ pipeline {
 
     stages {
         stage('build') {
-          if ( $GIT_BRANCH=='origin/master' ){
-            sh "printenv"
-          }
-          steps{
 
+          steps{
+              script{
+                if [ $GIT_BRANCH=='origin/master' ]
+                then
+                  sh "printenv"
+                fi
+                }
             }
           }
     }
