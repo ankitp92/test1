@@ -40,7 +40,7 @@ pipeline {
       success {
 
           node('master') {
-            build job: 'test2', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: env.branch_pushed],[$class: 'StringParameterValue', name: 'JOB_TRIGGER', value: "1"]]
+            build job: 'test2', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: env.skip_pnl],[$class: 'StringParameterValue', name: 'JOB_TRIGGER', value: "1"]]
           }
 
       }
