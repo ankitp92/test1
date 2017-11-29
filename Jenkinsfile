@@ -15,13 +15,31 @@ pipeline {
                 }
                 }
             }
-            agent any {
-              node: {
-                branch_pushed = env.GIT_BRANCH
-                build job: 'test2', parameters: [[$class: 'StringParameterValue', name: 'branch_pushed', value: branch_pushed]]
-              }
+
+
+        }
+
+        stage('build_next') {
+          steps {
+            script{
+              echo "We are here"
             }
           }
+
+
+
+        }
+
+    }
+
+    post {
+      success {
+
+          node('master') {
+            build job: 'test2', parameters: [[$class: 'StringParameterValue', name: 'SOURCE_BRANCH', value: env.branch_pushed]]
+          }
+
+      }
     }
 
 
