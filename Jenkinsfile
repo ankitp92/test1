@@ -6,20 +6,17 @@ pipeline {
         stage('build') {
 
           steps{
-              script{
-                if ( env.GIT_BRANCH=='origin/master' )
-                {
-                  env.branch_pushed="master"
-                  sh "printenv"
-
-                }
-
-                if ( env.GIT_BRANCH=='origin/test' )
-                {
-                  env.branch_pushed="test"
-                }
-
-                }
+            script {
+              sh 'printenv'
+              result = sh (script: "git log -1 | grep '\\[pnl skip\\]'", returnStatus: true)
+              echo "${result}"
+              if ( result!=0 ){
+                env.skip_pnl="0"
+                echo "Performing PnL"
+              }else {
+                env.skip_pnl="1"
+                echo "Not performing PnL"
+              }
             }
 
 
@@ -42,7 +39,7 @@ pipeline {
       success {
 
           node('master') {
-            build job: 'test2', parameters: [[$class: 'StringParameterValue', name: 'SOURCE_BRANCH', value: env.branch_pushed]]
+            build job: 'test2', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: env.branch_pushed],[$class: 'StringParameterValue', name: 'JOB_TRIGGER', value: "1"]]
           }
 
       }
