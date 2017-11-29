@@ -21,6 +21,7 @@ pipeline {
 
 
         }
+      }
 
         stage('build_next') {
           steps {
