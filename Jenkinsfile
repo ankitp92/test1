@@ -13,6 +13,12 @@ pipeline {
                   sh "printenv"
 
                 }
+
+                if ( env.GIT_BRANCH=='origin/test' )
+                {
+                  env.branch_pushed="test"
+                }
+
                 }
             }
 
