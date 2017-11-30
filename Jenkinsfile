@@ -28,6 +28,12 @@ pipeline {
             script{
               echo "We are here"
             }
+
+            node('master') {
+              build job: 'test2', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: env.skip_pnl],[$class: 'StringParameterValue', name: 'JOB_TRIGGER', value: "1"]]
+            }
+
+
           }
 
 
@@ -36,15 +42,7 @@ pipeline {
 
     }
 
-    post {
-      success {
 
-          node('master') {
-            build job: 'test2', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: env.skip_pnl],[$class: 'StringParameterValue', name: 'JOB_TRIGGER', value: "1"]]
-          }
-
-      }
-    }
 
 
 }
