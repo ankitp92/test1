@@ -8,13 +8,13 @@ pipeline {
           steps{
             script {
               sh 'printenv'
-              result = sh (script: "git log -1 | grep '\\[pnl skip\\]'", returnStatus: true)
+              result = sh ( script: "echo ${CHANGE_TITLE} | grep '\\[jenkins test\\]'", returnStatus: true )
               echo "${result}"
               if ( result!=0 ){
-                env.skip_pnl="0"
+                skip_pnl="0"
                 echo "Performing PnL"
               }else {
-                env.skip_pnl="1"
+                skip_pnl="1"
                 echo "Not performing PnL"
               }
             }
@@ -30,7 +30,7 @@ pipeline {
             }
 
             node('master') {
-              build job: 'test2', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: env.skip_pnl],[$class: 'StringParameterValue', name: 'JOB_TRIGGER', value: "1"]]
+              build job: 'test2/test', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: $skip_pnl],[$class: 'StringParameterValue', name: 'JOB_TRIGGER', value: "1"]]
             }
 
 
