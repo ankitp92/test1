@@ -30,7 +30,7 @@ pipeline {
             }
 
             node('master') {
-              build job: 'test2/test', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: $skip_pnl],[$class: 'StringParameterValue', name: 'JOB_TRIGGER', value: "1"]]
+              build job: 'test2/test', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: "${skip_pnl}"],[$class: 'StringParameterValue', name: 'JOB_TRIGGER', value: "1"]]
             }
 
 
