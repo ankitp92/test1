@@ -8,7 +8,7 @@ pipeline {
           steps{
             script {
               sh 'printenv'
-              result = sh ( script: "echo ${HOSTNAME} | grep '\\[jenkins test\\]'", returnStatus: true )
+              result = sh ( script: "git log -1 | grep '\\[jenkins test\\]'", returnStatus: true )
               echo "${result}"
               if ( result!=0 ){
                 skip_pnl="0"
