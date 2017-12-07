@@ -19,10 +19,8 @@ pipeline {
               }
             }
             echo "We are good"
+            build job: '../test2/master', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: "${skip_pnl}"],[$class: 'StringParameterValue', name: 'JOB_TRIGGER', value: "1"]], wait:false
 
-            node('master') {
-              build job: '../test2/master', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: "${skip_pnl}"],[$class: 'StringParameterValue', name: 'JOB_TRIGGER', value: "1"]]
-            }
 
 
         }
